@@ -18,6 +18,7 @@ public class Shooter : MonoBehaviour
     public InputManager inputManager;
     [Tooltip("Whether or not this shooter is controlled by the player")]
     public bool isPlayerControlled = false;
+    
 
     /// <summary>
     /// Description:
@@ -43,6 +44,7 @@ public class Shooter : MonoBehaviour
     /// </summary>
     void Update()
     {
+
         CheckInput();
     }
 

@@ -185,7 +185,7 @@ public class InputManager : MonoBehaviour
     
     [Header("Adrenaline Ability Input")]
     [Tooltip("Whether or not the Adrenaline ability button was pressed this frame")]
-    public bool adrenalinePressed;
+    public bool adrenalinePressed = false;
 
     /// <summary>
     /// Description:
@@ -215,6 +215,39 @@ public class InputManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         adrenalinePressed = false;
+    }
+    [Header("Teleport Ability Input")]
+    [Tooltip("Whether or not the teleport ability button was pressed this frame")]
+    public bool teleportPressed = false;
+    
+    /// <summary>
+    /// Description:
+    /// Reads and stores the teleport input
+    /// Input: 
+    /// CallbackContext callbackContext
+    /// Return:
+    /// void (no return)
+    /// </summary>
+    /// <param name="callbackContext">The context of the teleport input</param>
+    public void ReadTeleportAbilityInput(InputAction.CallbackContext context)
+    {
+        teleportPressed = !context.canceled;
+        StartCoroutine(ResetTeleportPressed());
+    }
+    
+    /// <summary>
+    /// Description
+    /// Coroutine that resets the teleport pressed variable after one frame
+    /// Input: 
+    /// none
+    /// Return: 
+    /// IEnumerator
+    /// </summary>
+    /// <returns>IEnumerator: Allows this to function as a coroutine</returns>
+    private IEnumerator ResetTeleportPressed()
+    {
+        yield return new WaitForEndOfFrame();
+        teleportPressed = false;
     }
     
     

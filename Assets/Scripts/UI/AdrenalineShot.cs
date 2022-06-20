@@ -1,15 +1,19 @@
+using UnityEditor;
 using UnityEngine;
 
 public class AdrenalineShot : Ability
 {
-    public float timeChanger = 0.5f;
-    
+    public float timeChanger = 0.3f;
 
+    void Awake()
+    {
+        timeForAbilityToStop *= timeChanger;
+    }
     void Update()
     {
         abilityPressed = inputManager.adrenalinePressed;
-
         fillObject();
+        CheckState();
     }
 
     protected override void DoWhenAbilityIsTriggered()

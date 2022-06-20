@@ -6,10 +6,12 @@ public class DamagingObjects : MonoBehaviour
     
     {
         GameObject collisionObject = collision.gameObject;
+        Health playerHealth = collisionObject.gameObject.GetComponent<Health>();
         if (collisionObject.tag == "Player")
-            
         {
-            collisionObject.gameObject.GetComponent<Health>().TakeDamage(ammountOfDamage);
+            //for later use
+            //playerHealth.TakeDamage(ammountOfDamage);
+            playerHealth.TakeDamage(playerHealth.currentHealth);
         }
     }
 }

@@ -1,87 +1,100 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Ability : MonoBehaviour
 {
-    public InputManager inputManager;
     
-    public float TimeForAbilityToBeAvailable;
-    public float timeForAbilityToStop;
+    public float timeForAbilityToBeAvailable = 10f;
+    public float timeForAbilityToStop = 10f;
     
-    public Image ImageToFill;
-    public GameObject abilityNotReadyEffect;
-    public GameObject abilityTriggerEffect;
-    
+    public List<Image> ImagesToFill = null;
+    public GameObject abilityTriggerEffect = null;
+    public GameObject abilityFinishedEffect = null;
 
-    protected bool abilityPressed;
-    protected bool abilityTriggered = false;
+
+    protected InputManager inputManager;
+    protected bool abilityPressed = false;
 
     
     private float AbilityTimer;
-
-    void Start()
-    {
-        AbilityTimer = Time.time;
+    private enum CurrentState{
+      ReadyToActivate,
+      Active,
+      OnCooldown,
     }
 
-    void Update()
+    private CurrentState state;
+
+    void  Start()
     {
-
-        if (abilityPressed && !OnCooldown() && !abilityTriggered)
-        {
-            DoWhenAbilityIsTriggered();
-            AbilityTimer = Time.time;
-            abilityTriggered = true;
-        }
-        else if (abilityPressed)
-        {
-            if (abilityNotReadyEffect != null)
-            {
-                Instantiate(abilityNotReadyEffect, transform.position, Quaternion.identity, null);
-            }
-        }
-
-        if (abilityTriggered && AbilityFinished())
-        {
-            DoWhenAbilityIsFinished();
-            AbilityTimer = Time.time;
-            abilityTriggered = false;
-        }
+        inputManager = InputManager.instance;
     }
 
-    private bool OnCooldown()
+    protected void CheckState()
     {
-        if (TimeForAbilityToBeAvailable >= Time.time - AbilityTimer && !abilityTriggered)
+        switch (state)
         {
-            return false;
+            case  CurrentState.ReadyToActivate:
+                if (abilityPressed)
+                {
+                    DoWhenAbilityIsTriggered();
+                    AbilityTimer = timeForAbilityToStop;
+                    state = CurrentState.Active;
+                }
+                break;
+            //if on cooldown
+            case  CurrentState.OnCooldown:
+                if (AbilityTimer > 0)
+                {
+                    AbilityTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    state = CurrentState.ReadyToActivate;
+                }
+                break;
+            //if the ability is running
+            case CurrentState.Active:
+                if (AbilityTimer > 0)
+                {
+                    AbilityTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    DoWhenAbilityIsFinished();
+                    AbilityTimer = timeForAbilityToBeAvailable;
+                    state = CurrentState.OnCooldown;
+                }
+                break;
         }
-        return true;
-    }
-
-    private bool AbilityFinished()
-    {
-        if (Time.time - AbilityTimer <= timeForAbilityToStop)
-        {
-            return true;
-        }
-        return false;
+        
     }
 
     protected void fillObject()
     {
-        if (ImageToFill != null && TimeForAbilityToBeAvailable <= Time.time - AbilityTimer && !abilityTriggered)
-        {
-            float percentage = (float) (Time.time - AbilityTimer) / (float) TimeForAbilityToBeAvailable;
-            ImageToFill.fillAmount = percentage;
-        }
+            float percentage;
+            switch (state)
+            {
+                //if on cooldown
+                case  CurrentState.OnCooldown:
+                    percentage = (float) (AbilityTimer) / (float) timeForAbilityToBeAvailable;
+                    foreach (var Image in ImagesToFill)
+                    {
+                        Image.fillAmount = percentage;
+                    }
 
-        if (abilityTriggered)
-        {
-            float percentage = 1f - (float) (Time.time - AbilityTimer) / (float) timeForAbilityToStop;
-            ImageToFill.fillAmount = percentage;
-        }
-
+                    break;
+                //if the ability is running
+                case CurrentState.Active:
+                    percentage = 1f - (float) (AbilityTimer) / (float) timeForAbilityToStop;
+                    foreach (var Image in ImagesToFill)
+                    {
+                        Image.fillAmount = percentage;
+                    }
+                    break;
+            }
     }
 
     protected virtual void DoWhenAbilityIsTriggered()
@@ -92,6 +105,12 @@ public class Ability : MonoBehaviour
         }
     }
 
-    protected virtual void DoWhenAbilityIsFinished(){}
+    protected virtual void DoWhenAbilityIsFinished(){        
+        if (abilityFinishedEffect != null)
+        {
+            Instantiate(abilityFinishedEffect, transform.position, Quaternion.identity, null);
+        }
+        
+    }
 
 }

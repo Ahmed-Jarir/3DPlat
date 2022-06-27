@@ -7,7 +7,7 @@ public class Teleport : Ability
     public GameObject player;
     private void Update()
     {
-        abilityPressed = inputManager.teleportPressed;
+        //abilityPressed = inputManager.teleportPressed;
         CheckState();
         fillObject();
     }

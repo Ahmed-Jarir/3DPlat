@@ -32,6 +32,29 @@ public class ThirdPersonCharacterController : MonoBehaviour
     [Tooltip("The effec to create when the player lands on the ground")]
     public GameObject landingEffect;
 
+    //[SerializeField] private bool willSlide = true;
+    //[SerializeField] private float speedDownTheSlide = 8f;
+
+    //private Vector3 hitPointNormal;
+
+    //private bool isSliding
+    //{
+    //    get
+    //    {
+    //        Debug.DrawRay(transform.position,Vector3.down,Color.red);
+    //        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2f))
+    //        {
+    //            hitPointNormal = slopeHit.normal;
+    //            return Vector3.Angle(hitPointNormal, Vector3.up) > characterController.slopeLimit;
+    //        }
+    //        else
+    //        {
+    //            return false;
+    //        }
+    //    } 
+    //}
+    
+    
     /// <summary>
     /// Description:
     /// Standard Unity function that is called before the first frame
@@ -182,6 +205,12 @@ public class ThirdPersonCharacterController : MonoBehaviour
         float leftRightInput = leftRightMovementAxis;
         // The input corresponding to the forward and backward movement
         float forwardBackwardInput = forwardBackwardMovementAxis;
+
+        //Debug.Log(willSlide && isSliding);
+        //if (willSlide && isSliding)
+        //{
+        //    moveDirection += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z) * speedDownTheSlide;
+        //}
 
         // If the controller is grounded
         if (characterController.isGrounded && !bounced)

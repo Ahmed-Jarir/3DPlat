@@ -17,8 +17,11 @@ public class TeleportProjectile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        playerCharCont.enabled = false;
-        player.transform.position = this.gameObject.transform.position;
-        playerCharCont.enabled = true;
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag == "Feet")
+        {
+            playerCharCont.enabled = false;
+            player.transform.position = this.gameObject.transform.position;
+            playerCharCont.enabled = true;
+        }
     }
 }

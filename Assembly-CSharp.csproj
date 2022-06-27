@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\UI\UIelement\HealthDisplay.cs" />
      <Compile Include="Assets\Scripts\Keys&amp;Doors\KeyRing.cs" />
      <Compile Include="Assets\Scripts\Pickups\Pickup.cs" />
+     <Compile Include="Assets\Scripts\Projectile\TeleportProjectile.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyAttackerExplosive.cs" />
      <Compile Include="Assets\Scripts\Utility\CollisionEventCaller.cs" />
      <Compile Include="Assets\Scripts\Environment\WaypointMover.cs" />
@@ -113,7 +114,9 @@
      <Compile Include="Assets\Scripts\UI\CursorChanger.cs" />
      <Compile Include="Assets\Scripts\Keys&amp;Doors\Door.cs" />
      <Compile Include="Assets\Scripts\Environment\LevelLoadTrigger.cs" />
-     <Compile Include="Assets\Scripts\Projectile\TeleportProjectile.cs" />
+     <Compile Include="Assets\Scripts\Pickups\UnlockAbilityPickup.cs" />
+     <Compile Include="Assets\Scripts\Pickups\ResetAbilityTimerPickup.cs" />
+     <Compile Include="Assets\Scripts\UI\JumpBoost.cs" />
      <None Include="Assets\Art\Fonts\manaspc\license.txt" />
      <None Include="Assets\Art\Fonts\Font Source.txt" />
  <Reference Include="UnityEngine">

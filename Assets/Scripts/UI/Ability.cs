@@ -8,7 +8,8 @@ public class Ability : MonoBehaviour
     
     public float timeForAbilityToBeAvailable = 10f;
     public float timeForAbilityToStop = 10f;
-    
+
+    public GameObject abilityGameObject;
     public List<Image> ImagesToFill = null;
     public GameObject abilityTriggerEffect = null;
     public GameObject abilityFinishedEffect = null;
@@ -16,10 +17,12 @@ public class Ability : MonoBehaviour
 
     protected InputManager inputManager;
     protected bool abilityPressed = false;
+    
 
     
     private float AbilityTimer;
     private enum CurrentState{
+      Locked,
       ReadyToActivate,
       Active,
       OnCooldown,
@@ -29,11 +32,28 @@ public class Ability : MonoBehaviour
 
     void  Start()
     {
+        bool abilityUnlocked = PlayerPrefs.GetInt(abilityGameObject.name) == 1;
+        abilityGameObject.SetActive(abilityUnlocked); 
+        state = abilityUnlocked ? CurrentState.ReadyToActivate : CurrentState.Locked;
         inputManager = InputManager.instance;
+    }
+
+    public void unlockAbility()
+    {
+       abilityGameObject.SetActive(true);
+       state = CurrentState.ReadyToActivate;
+       PlayerPrefs.SetInt(abilityGameObject.name, 1);
+    }
+
+    public void resetAbilityTimer()
+    {
+        state = CurrentState.ReadyToActivate;
+        AbilityTimer = 0;
     }
 
     protected void CheckState()
     {
+        
         switch (state)
         {
             case  CurrentState.ReadyToActivate:
@@ -44,7 +64,6 @@ public class Ability : MonoBehaviour
                     state = CurrentState.Active;
                 }
                 break;
-            //if on cooldown
             case  CurrentState.OnCooldown:
                 if (AbilityTimer > 0)
                 {
@@ -70,6 +89,7 @@ public class Ability : MonoBehaviour
                 break;
         }
         
+        
     }
 
     protected void fillObject()
@@ -77,7 +97,6 @@ public class Ability : MonoBehaviour
             float percentage;
             switch (state)
             {
-                //if on cooldown
                 case  CurrentState.OnCooldown:
                     percentage = (float) (AbilityTimer) / (float) timeForAbilityToBeAvailable;
                     foreach (var Image in ImagesToFill)

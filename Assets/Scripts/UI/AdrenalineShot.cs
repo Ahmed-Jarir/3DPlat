@@ -25,6 +25,7 @@ public class AdrenalineShot : Ability
     protected override void DoWhenAbilityIsFinished()
     {
         Time.timeScale = 1;
+        base.DoWhenAbilityIsFinished();
     }
 
 

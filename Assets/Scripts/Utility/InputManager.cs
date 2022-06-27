@@ -182,7 +182,7 @@ public class InputManager : MonoBehaviour
         pausePressed = false;
     }
     
-    
+//adrenaline ability block     
     [Header("Adrenaline Ability Input")]
     [Tooltip("Whether or not the Adrenaline ability button was pressed this frame")]
     public bool adrenalinePressed = false;
@@ -216,39 +216,81 @@ public class InputManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         adrenalinePressed = false;
     }
-    [Header("Teleport Ability Input")]
-    [Tooltip("Whether or not the teleport ability button was pressed this frame")]
-    public bool teleportPressed = false;
+// end of adrenaline ability block     
+
+
+
+
+//jump boost ability block    
+    [Header("Jump Boost Ability Input")]
+    [Tooltip("Whether or not the Jump Boost ability button was pressed this frame")]
+    public bool JumpBoostPressed = false;
     
     /// <summary>
     /// Description:
-    /// Reads and stores the teleport input
+    /// Reads and stores the jump boost input
     /// Input: 
     /// CallbackContext callbackContext
     /// Return:
     /// void (no return)
     /// </summary>
-    /// <param name="callbackContext">The context of the teleport input</param>
-    public void ReadTeleportAbilityInput(InputAction.CallbackContext context)
+    /// <param name="callbackContext">The context of the adrenaline input</param>
+    public void ReadJumpBoostAbilityInput(InputAction.CallbackContext context)
     {
-        teleportPressed = !context.canceled;
-        StartCoroutine(ResetTeleportPressed());
+        adrenalinePressed = !context.canceled;
+        StartCoroutine(ResetJumpBoostPressed());
     }
     
     /// <summary>
     /// Description
-    /// Coroutine that resets the teleport pressed variable after one frame
+    /// Coroutine that resets the jump boost pressed variable after one frame
     /// Input: 
     /// none
     /// Return: 
     /// IEnumerator
     /// </summary>
     /// <returns>IEnumerator: Allows this to function as a coroutine</returns>
-    private IEnumerator ResetTeleportPressed()
+    private IEnumerator ResetJumpBoostPressed()
     {
         yield return new WaitForEndOfFrame();
-        teleportPressed = false;
+        adrenalinePressed = false;
     }
+// end of jump boost ability block     
+
+
+    //[Header("Teleport Ability Input")]
+    //[Tooltip("Whether or not the teleport ability button was pressed this frame")]
+    //public bool teleportPressed = false;
+    //
+    ///// <summary>
+    ///// Description:
+    ///// Reads and stores the teleport input
+    ///// Input: 
+    ///// CallbackContext callbackContext
+    ///// Return:
+    ///// void (no return)
+    ///// </summary>
+    ///// <param name="callbackContext">The context of the teleport input</param>
+    //public void ReadTeleportAbilityInput(InputAction.CallbackContext context)
+    //{
+    //    teleportPressed = !context.canceled;
+    //    StartCoroutine(ResetTeleportPressed());
+    //}
+    //
+    ///// <summary>
+    ///// Description
+    ///// Coroutine that resets the teleport pressed variable after one frame
+    ///// Input: 
+    ///// none
+    ///// Return: 
+    ///// IEnumerator
+    ///// </summary>
+    ///// <returns>IEnumerator: Allows this to function as a coroutine</returns>
+    //private IEnumerator ResetTeleportPressed()
+    //{
+    //    yield return new WaitForEndOfFrame();
+    //    teleportPressed = false;
+    //}
     
     
     [Header("Cycle weapon input")]

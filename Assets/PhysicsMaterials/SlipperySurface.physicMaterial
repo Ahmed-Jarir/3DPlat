@@ -9,6 +9,6 @@ PhysicMaterial:
   m_Name: SlipperySurface
   dynamicFriction: 0.3
   staticFriction: 0.3
-  bounciness: 0
+  bounciness: 1
   frictionCombine: 0
   bounceCombine: 0

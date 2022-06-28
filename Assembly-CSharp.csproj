@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\UI\UIelement\HighScoreDisplay.cs" />
      <Compile Include="Assets\Scripts\Environment\Teleporter.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyAttackerMelee.cs" />
+     <Compile Include="Assets\Scripts\Pickups\UnlockAbilityPickup.cs" />
      <Compile Include="Assets\Scripts\Shooter\Shooter.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyAttacker.cs" />
      <Compile Include="Assets\Scripts\Environment\CheckpointTracker.cs" />
@@ -72,6 +73,7 @@
      <Compile Include="Assets\Scripts\Pickups\Pickup.cs" />
      <Compile Include="Assets\Scripts\Projectile\TeleportProjectile.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyAttackerExplosive.cs" />
+     <Compile Include="Assets\Scripts\UI\JumpBoost.cs" />
      <Compile Include="Assets\Scripts\Utility\CollisionEventCaller.cs" />
      <Compile Include="Assets\Scripts\Environment\WaypointMover.cs" />
      <Compile Include="Assets\Scripts\Environment\DamagingObjects.cs" />
@@ -102,6 +104,7 @@
      <Compile Include="Assets\Scripts\UI\UIelement\LivesDisplay.cs" />
      <Compile Include="Assets\Scripts\Health&amp;Damage\Health.cs" />
      <Compile Include="Assets\Scripts\Pickups\PickupAnimation.cs" />
+     <Compile Include="Assets\Scripts\Pickups\ResetAbilityTimerPickup.cs" />
      <Compile Include="Assets\Scripts\Projectile\CurvedProjectile.cs" />
      <Compile Include="Assets\Scripts\Utility\GoalManager.cs" />
      <Compile Include="Assets\Scripts\Enemies\FlyingEnemy.cs" />
@@ -114,9 +117,6 @@
      <Compile Include="Assets\Scripts\UI\CursorChanger.cs" />
      <Compile Include="Assets\Scripts\Keys&amp;Doors\Door.cs" />
      <Compile Include="Assets\Scripts\Environment\LevelLoadTrigger.cs" />
-     <Compile Include="Assets\Scripts\Pickups\UnlockAbilityPickup.cs" />
-     <Compile Include="Assets\Scripts\Pickups\ResetAbilityTimerPickup.cs" />
-     <Compile Include="Assets\Scripts\UI\JumpBoost.cs" />
      <None Include="Assets\Art\Fonts\manaspc\license.txt" />
      <None Include="Assets\Art\Fonts\Font Source.txt" />
  <Reference Include="UnityEngine">

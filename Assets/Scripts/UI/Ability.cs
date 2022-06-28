@@ -9,16 +9,15 @@ public class Ability : MonoBehaviour
     public float timeForAbilityToBeAvailable = 10f;
     public float timeForAbilityToStop = 10f;
 
-    public GameObject abilityGameObject;
-    public List<Image> ImagesToFill = null;
-    public GameObject abilityTriggerEffect = null;
-    public GameObject abilityFinishedEffect = null;
-
+    [SerializeField] private GameObject abilityGameObject;
+    [Tooltip("this is an image that will appear when the ability is ready to activate but its not necessary to attach anything to it")]
+    [SerializeField] private GameObject imageToActivateWhenAbilityIsReady;
+    [SerializeField] private List<Image> ImagesToFill = null;
+    [SerializeField] private GameObject abilityTriggerEffect = null;
+    [SerializeField] private GameObject abilityFinishedEffect = null;
 
     protected InputManager inputManager;
     protected bool abilityPressed = false;
-    
-
     
     private float AbilityTimer;
     private enum CurrentState{
@@ -113,11 +112,22 @@ public class Ability : MonoBehaviour
                         Image.fillAmount = percentage;
                     }
                     break;
+                case CurrentState.ReadyToActivate:
+                    if (imageToActivateWhenAbilityIsReady != null)
+                    {
+                        imageToActivateWhenAbilityIsReady.SetActive(true);
+                    }
+                    break;
+
             }
     }
 
     protected virtual void DoWhenAbilityIsTriggered()
     {
+        if (imageToActivateWhenAbilityIsReady != null)
+        {
+            imageToActivateWhenAbilityIsReady.SetActive(false);
+        }
         if (abilityTriggerEffect != null)
         {
             Instantiate(abilityTriggerEffect, transform.position, Quaternion.identity, null);

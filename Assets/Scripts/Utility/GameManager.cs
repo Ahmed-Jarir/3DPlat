@@ -194,6 +194,19 @@ public class GameManager : MonoBehaviour
             instance.uiManager.UpdateUI();
         }
     }
+    public void Explore(){
+        player.gameObject.SetActive(true);
+        player.GetComponent<ThirdPersonCharacterController>().playerRepresentation.gameObject.SetActive(true);
+        player.GetComponent<ThirdPersonCharacterController>().playerCamera.GetComponent<ThirdPersonCamera>().enabled = true;
+        uiManager.allowPause = true;
+        Time.timeScale = 1;
+        uiManager.GoToPage(uiManager.defaultPage);
+        CursorManager.instance.ChangeCursorMode(CursorManager.CursorState.InGame);
+        if (victoryEffect != null)
+        {
+            Instantiate(victoryEffect, transform.position, transform.rotation, null);
+        }
+    }
 
     /// <summary>
     /// Description:

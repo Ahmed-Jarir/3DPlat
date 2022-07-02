@@ -97,7 +97,7 @@ public class Ability : MonoBehaviour
             switch (state)
             {
                 case  CurrentState.OnCooldown:
-                    percentage = (float) (AbilityTimer) / (float) timeForAbilityToBeAvailable;
+                    percentage = 1f - (float) (AbilityTimer) / (float) timeForAbilityToBeAvailable;
                     foreach (var Image in ImagesToFill)
                     {
                         Image.fillAmount = percentage;
@@ -106,7 +106,7 @@ public class Ability : MonoBehaviour
                     break;
                 //if the ability is running
                 case CurrentState.Active:
-                    percentage = 1f - (float) (AbilityTimer) / (float) timeForAbilityToStop;
+                    percentage = (float) (AbilityTimer) / (float) timeForAbilityToStop;
                     foreach (var Image in ImagesToFill)
                     {
                         Image.fillAmount = percentage;

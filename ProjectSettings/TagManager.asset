@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Feet
+  - Projectile
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - UiBg
   - Water
   - UI
   - 
@@ -41,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: DisplayImages
+    uniqueID: 1140194645
     locked: 0

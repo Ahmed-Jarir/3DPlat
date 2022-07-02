@@ -179,6 +179,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void TriggerAbilityInformation(int AbilityPage)
+    {
+        CursorManager.instance.ChangeCursorMode(CursorManager.CursorState.Menu);
+        GoToPage(AbilityPage);
+        Time.timeScale = 0;
+        isPaused = true;
+    }
+
     /// <summary>
     /// Description:
     /// If the game is paused, unpauses the game.
